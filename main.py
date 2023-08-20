@@ -1,19 +1,23 @@
 def display_page(data):
+    # Вывод всех записей в справочнике
     for entry in data:
         print(entry)
 
 
 def add_entry(data, entry):
+    # Добавление записи в справочник
     data.append(entry)
     save_to_file(data)
 
 
 def edit_entry(data, index, new_entry):
+    # Изменение записи в справочнике
     data[index] = new_entry
     save_to_file(data)
 
 
 def search_entries(data, user_search_input):
+    # Поиск совпадений внутри справочника
     results = []
     for text in data:
         if all(word in text for word in user_search_input):
@@ -24,12 +28,14 @@ def search_entries(data, user_search_input):
 
 
 def save_to_file(data):
+    # Сохранение данных справочника
     with open("db.txt", "w") as file:
         for entry in data:
             file.write(entry + "\n")
 
 
 def load_from_file():
+    # Загрузка справочника в память
     data = []
     with open("db.txt", "r") as file:
         for line in file:
@@ -38,6 +44,7 @@ def load_from_file():
 
 
 def main():
+    # Основная функция main
     data = load_from_file()
 
     while True:
@@ -50,6 +57,7 @@ def main():
         print("6. Выход")
         choice = input("Выберите действие: ")
 
+        # Выбор пункта меню
         if choice == "1":
             display_page(data)
         elif choice == "2":
@@ -63,7 +71,8 @@ def main():
             user_search_input = input("Введите значения через запятую для поиска: ").split(',')
             search_entries(data, user_search_input)
         elif choice == "5":
-            print('')
+            print('Это телефонный справочник.\nВсе данные в нем хранятся в следующем виде:'
+                  '\nФамилия, имя, отчество, название организации, телефон рабочий, телефон личный.')
         elif choice == '6':
             print('Работа программы остановлена.')
             break
