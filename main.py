@@ -1,5 +1,5 @@
 def display_page(page_size, selected_page, data):
-    # Вывод всех записей в справочнике
+    # Вывод всех записей в справочнике по страницам
     start_index = (selected_page - 1) * page_size
     end_index = start_index + page_size
     for entry in data[start_index:end_index]:
