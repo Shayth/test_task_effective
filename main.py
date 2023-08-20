@@ -1,6 +1,8 @@
-def display_page(data):
+def display_page(page_size, selected_page, data):
     # Вывод всех записей в справочнике
-    for entry in data:
+    start_index = (selected_page - 1) * page_size
+    end_index = start_index + page_size
+    for entry in data[start_index:end_index]:
         print(entry)
 
 
@@ -47,6 +49,10 @@ def main():
     # Основная функция main
     data = load_from_file()
 
+    page_size: int = 5
+    number_of_lines = len(data)
+    amount_of_pages: int = -(-number_of_lines // page_size)
+
     while True:
         print("\nТелефонный справочник")
         print("1. Вывод записей")
@@ -59,7 +65,10 @@ def main():
 
         # Выбор пункта меню
         if choice == "1":
-            display_page(data)
+            print(f'В данный момент в справочнике {number_of_lines} записей')
+            print(f'Количество доступных страниц: {amount_of_pages}')
+            selected_page = int(input('Введите необходимую страницу: '))
+            display_page(page_size, selected_page, data)
         elif choice == "2":
             new_entry = input("Введите новую запись: ")
             add_entry(data, new_entry)
